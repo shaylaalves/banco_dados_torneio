@@ -1,63 +1,136 @@
 import pyodbc
 
-# 🔗 Conexão com PostgreSQL via ODBC usando DSN
 conn = pyodbc.connect(
-    'DSN=TorneioPokemon;UID=postgres;PWD=123456'  # ✅ Substitua pela sua senha real
+    'DSN=TorneioPokemon;UID=postgres;PWD=123456'
 )
 
+# ========================
+# CRUD Treinadores
+# ========================
 
-# ✅ Função para inserir um treinador
 def inserir_treinador(nome, cidade, idade, ranking):
     cursor = conn.cursor()
     cursor.execute(
-        """
-        INSERT INTO torneio_treinador (nome, cidade, idade, ranking)
-        VALUES (?, ?, ?, ?)
-        """,
+        "INSERT INTO torneio_treinador (nome, cidade, idade, ranking) VALUES (?, ?, ?, ?)",
         (nome, cidade, idade, ranking)
     )
     conn.commit()
     cursor.close()
 
 
-# ✅ Função para listar todos os treinadores
 def listar_treinadores():
     cursor = conn.cursor()
-    cursor.execute(
-        """
-        SELECT id, nome, cidade, idade, ranking
-        FROM torneio_treinador
-        """
-    )
-    treinadores = cursor.fetchall()
+    cursor.execute("SELECT * FROM torneio_treinador")
+    dados = cursor.fetchall()
     cursor.close()
-    return treinadores
+    return dados
 
 
-# ✅ Função para atualizar um treinador
-def atualizar_treinador(id, nome, cidade, idade, ranking):
+# ========================
+# CRUD Pokémon
+# ========================
+
+def inserir_pokemon(nome, tipo, nivel, treinador_id):
     cursor = conn.cursor()
     cursor.execute(
-        """
-        UPDATE torneio_treinador
-        SET nome = ?, cidade = ?, idade = ?, ranking = ?
-        WHERE id = ?
-        """,
-        (nome, cidade, idade, ranking, id)
+        "INSERT INTO torneio_pokemon (nome, tipo, nivel, treinador_id) VALUES (?, ?, ?, ?)",
+        (nome, tipo, nivel, treinador_id)
     )
     conn.commit()
     cursor.close()
 
 
-# ✅ Função para deletar um treinador
-def deletar_treinador(id):
+def listar_pokemons():
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM torneio_pokemon")
+    dados = cursor.fetchall()
+    cursor.close()
+    return dados
+
+
+# ========================
+# CRUD Itens
+# ========================
+
+def inserir_item(nome, efeito, quantidade, treinador_id):
     cursor = conn.cursor()
     cursor.execute(
-        """
-        DELETE FROM torneio_treinador
-        WHERE id = ?
-        """,
-        (id,)
+        "INSERT INTO torneio_item (nome, efeito, quantidade, treinador_id) VALUES (?, ?, ?, ?)",
+        (nome, efeito, quantidade, treinador_id)
     )
     conn.commit()
     cursor.close()
+
+
+def listar_itens():
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM torneio_item")
+    dados = cursor.fetchall()
+    cursor.close()
+    return dados
+
+
+# ========================
+# CRUD Batalhas
+# ========================
+
+def inserir_batalha(data, local, vencedor_id, perdedor_id):
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO torneio_batalha (data, local, vencedor_id, perdedor_id) VALUES (?, ?, ?, ?)",
+        (data, local, vencedor_id, perdedor_id)
+    )
+    conn.commit()
+    cursor.close()
+
+
+def listar_batalhas():
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM torneio_batalha")
+    dados = cursor.fetchall()
+    cursor.close()
+    return dados
+
+
+# ========================
+# CRUD Locais
+# ========================
+
+def inserir_local(nome, tipo_ambiente, cidade):
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO torneio_local (nome, tipo_ambiente, cidade) VALUES (?, ?, ?)",
+        (nome, tipo_ambiente, cidade)
+    )
+    conn.commit()
+    cursor.close()
+
+
+def listar_locais():
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM torneio_local")
+    dados = cursor.fetchall()
+    cursor.close()
+    return dados
+
+
+# ========================
+# CRUD Times
+# ========================
+
+def inserir_time(nome):
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO torneio_time (nome) VALUES (?)",
+        (nome,)
+    )
+    conn.commit()
+    cursor.close()
+
+
+def listar_times():
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM torneio_time")
+    dados = cursor.fetchall()
+    cursor.close()
+    return dados
