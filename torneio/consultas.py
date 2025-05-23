@@ -8,19 +8,20 @@ conn = pyodbc.connect(
 # Consultas SQL Avançadas
 
 
-# ✅ BETWEEN — Batalhas em um intervalo de datas
+# BETWEEN — Batalhas em um intervalo de datas
 def batalhas_no_intervalo_de_datas(data_inicial, data_final):
     cursor = conn.cursor()
     cursor.execute(
         """
         SELECT * FROM torneio_bairro.batalha
-        WHERE data BETWEEN ? AND ?
+        WHERE data BETWEEN %s AND %s
         """,
         (data_inicial, data_final)
     )
     dados = cursor.fetchall()
     cursor.close()
     return dados
+
 
 
 # LIKE — Pokémons que começam com 'Pika'
