@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gerenciar Batalhas</title>
+  </head>
+  <body>
+    <h1>⚔️ Gerenciar Batalhas</h1>
+
+    <h2>Adicionar Nova Batalha</h2>
+    <form action="/adicionar_batalha" method="post">
+      <label>Data:</label>
+      <input type="date" name="data" required /><br />
+      <label>ID do Local:</label>
+      <input type="number" name="local" required /><br />
+      <label>ID do Vencedor:</label>
+      <input type="number" name="vencedor_id" required /><br />
+      <label>ID do Perdedor:</label>
+      <input type="number" name="perdedor_id" required /><br />
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <hr />
+
+    <h2>Lista de Batalhas</h2>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Data</th>
+        <th>Local</th>
+        <th>Vencedor</th>
+        <th>Perdedor</th>
+        <th>Ações</th>
+      </tr>
+      {% for b in batalhas %}
+      <tr>
+        <td>{{ b[0] }}</td>
+        <td>{{ b[1] }}</td>
+        <td>{{ b[2] }}</td>
+        <td>{{ b[3] }}</td>
+        <td>{{ b[4] }}</td>
+        <td>
+          <a href="/excluir_batalha/{{ b[0] }}">Excluir</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <p><a href="/">🔙 Voltar ao Menu</a></p>
+  </body>
+</html>

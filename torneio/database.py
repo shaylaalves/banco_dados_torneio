@@ -1,5 +1,6 @@
 import pyodbc
 
+# Conexão com o banco de dados
 conn = pyodbc.connect(
     'DSN=TorneioPokemon;UID=postgres;PWD=123456'
 )
@@ -24,6 +25,15 @@ def listar_treinadores():
     cursor.close()
     return dados
 
+def deletar_treinador(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM torneio_bairro.treinador WHERE id = ?",
+        (id,)
+    )
+    conn.commit()
+    cursor.close()
+
 # ========================
 # CRUD Pokémon
 # ========================
@@ -43,6 +53,15 @@ def listar_pokemons():
     dados = cursor.fetchall()
     cursor.close()
     return dados
+
+def deletar_pokemon(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM torneio_bairro.pokemon WHERE id = ?",
+        (id,)
+    )
+    conn.commit()
+    cursor.close()
 
 # ========================
 # CRUD Itens
@@ -64,6 +83,15 @@ def listar_itens():
     cursor.close()
     return dados
 
+def deletar_item(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM torneio_bairro.item WHERE id = ?",
+        (id,)
+    )
+    conn.commit()
+    cursor.close()
+
 # ========================
 # CRUD Batalhas
 # ========================
@@ -83,6 +111,15 @@ def listar_batalhas():
     dados = cursor.fetchall()
     cursor.close()
     return dados
+
+def deletar_batalha(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM torneio_bairro.batalha WHERE id = ?",
+        (id,)
+    )
+    conn.commit()
+    cursor.close()
 
 # ========================
 # CRUD Locais
@@ -104,6 +141,15 @@ def listar_locais():
     cursor.close()
     return dados
 
+def deletar_local(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM torneio_bairro.local WHERE id = ?",
+        (id,)
+    )
+    conn.commit()
+    cursor.close()
+
 # ========================
 # CRUD Times
 # ========================
@@ -123,3 +169,12 @@ def listar_times():
     dados = cursor.fetchall()
     cursor.close()
     return dados
+
+def deletar_time(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM torneio_bairro.time WHERE id = ?",
+        (id,)
+    )
+    conn.commit()
+    cursor.close()

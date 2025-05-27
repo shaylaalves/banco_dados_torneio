@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gerenciar Pokémon</title>
+  </head>
+  <body>
+    <h1>⚡ Gerenciar Pokémon</h1>
+
+    <h2>Adicionar Novo Pokémon</h2>
+    <form action="/adicionar_pokemon" method="post">
+      <label>Nome:</label>
+      <input type="text" name="nome" required /><br />
+      <label>Tipo:</label>
+      <input type="text" name="tipo" required /><br />
+      <label>Nível:</label>
+      <input type="number" name="nivel" required /><br />
+      <label>ID do Treinador:</label>
+      <input type="number" name="treinador_id" required /><br />
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <hr />
+
+    <h2>Lista de Pokémon</h2>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Nível</th>
+        <th>Treinador ID</th>
+        <th>Ações</th>
+      </tr>
+      {% for p in pokemons %}
+      <tr>
+        <td>{{ p[0] }}</td>
+        <td>{{ p[1] }}</td>
+        <td>{{ p[2] }}</td>
+        <td>{{ p[3] }}</td>
+        <td>{{ p[4] }}</td>
+        <td>
+          <a href="/excluir_pokemon/{{ p[0] }}">Excluir</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <p><a href="/">🔙 Voltar ao Menu</a></p>
+  </body>
+</html>

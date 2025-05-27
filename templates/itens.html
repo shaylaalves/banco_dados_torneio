@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gerenciar Itens</title>
+  </head>
+  <body>
+    <h1>🎒 Gerenciar Itens</h1>
+
+    <h2>Adicionar Novo Item</h2>
+    <form action="/adicionar_item" method="post">
+      <label>Nome:</label>
+      <input type="text" name="nome" required /><br />
+      <label>Efeito:</label>
+      <input type="text" name="efeito" required /><br />
+      <label>Quantidade:</label>
+      <input type="number" name="quantidade" required /><br />
+      <label>ID do Treinador:</label>
+      <input type="number" name="treinador_id" required /><br />
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <hr />
+
+    <h2>Lista de Itens</h2>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Efeito</th>
+        <th>Quantidade</th>
+        <th>Treinador ID</th>
+        <th>Ações</th>
+      </tr>
+      {% for i in itens %}
+      <tr>
+        <td>{{ i[0] }}</td>
+        <td>{{ i[1] }}</td>
+        <td>{{ i[2] }}</td>
+        <td>{{ i[3] }}</td>
+        <td>{{ i[4] }}</td>
+        <td>
+          <a href="/excluir_item/{{ i[0] }}">Excluir</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <p><a href="/">🔙 Voltar ao Menu</a></p>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Consultas SQL</title>
+  </head>
+  <body>
+    <h1>🔍 Buscar Batalhas no Intervalo</h1>
+
+    <form action="/consultar_batalhas_intervalo" method="post">
+      <label>Data Inicial:</label>
+      <input type="date" name="data_inicial" required /><br />
+      <label>Data Final:</label>
+      <input type="date" name="data_final" required /><br />
+      <button type="submit">Buscar Batalhas no Intervalo</button>
+    </form>
+
+    <h2>Resultados:</h2>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Data</th>
+        <th>Local</th>
+        <th>Vencedor</th>
+        <th>Perdedor</th>
+      </tr>
+      {% for b in resultado %}
+      <tr>
+        <td>{{ b[0] }}</td>
+        <td>{{ b[1] }}</td>
+        <td>{{ b[2] }}</td>
+        <td>{{ b[3] }}</td>
+        <td>{{ b[4] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <p><a href="/">🔙 Voltar ao Menu</a></p>
+  </body>
+</html>

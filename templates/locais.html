@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gerenciar Locais</title>
+  </head>
+  <body>
+    <h1>📍 Gerenciar Locais</h1>
+
+    <h2>Adicionar Novo Local</h2>
+    <form action="/adicionar_local" method="post">
+      <label>Nome:</label>
+      <input type="text" name="nome" required /><br />
+      <label>Tipo de Ambiente:</label>
+      <input type="text" name="tipo_ambiente" required /><br />
+      <label>Cidade:</label>
+      <input type="text" name="cidade" required /><br />
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <hr />
+
+    <h2>Lista de Locais</h2>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Tipo de Ambiente</th>
+        <th>Cidade</th>
+        <th>Ações</th>
+      </tr>
+      {% for l in locais %}
+      <tr>
+        <td>{{ l[0] }}</td>
+        <td>{{ l[1] }}</td>
+        <td>{{ l[2] }}</td>
+        <td>{{ l[3] }}</td>
+        <td>
+          <a href="/excluir_local/{{ l[0] }}">Excluir</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <p><a href="/">🔙 Voltar ao Menu</a></p>
+  </body>
+</html>
